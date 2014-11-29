@@ -15,18 +15,10 @@ def reduce(function, iterable, initializer=None):
 #My Code starts here
 #First I'm going to define what a factorial is
 
-def factorial(n):
-        fact = reduce(operator.mul, range(1, n+1), 1)
-        return(fact)
-###########################
 #Here I'm defining Permutation
 #N!/(n-k)!
 def npr(n, k):
-    # np = factorial(n)
-    # pr = factorial(n-k)
-    # npr = np / pr
-    # return(npr) #
-    return (factorial(n) / factorial(n-k))
+    return reduce(operator.mul, range(n-k+1,n+1), 1)
 #################################
 #Creates a list of permutations
 
@@ -48,7 +40,7 @@ def sbx(x):
 #################################
 def term(f):
     global b
-    top = npr(n, f) * (z**(f+1)) * (-b)**f
+    top = npr(n, f) * (-b)**f  * (z**(f+1))
 
     global y
     y *= sbx(1-f) 
@@ -56,6 +48,7 @@ def term(f):
     return ((top, y))
 #################################
 #################################
+
 ##where all the magic happens
 def magic(x):
     global n
@@ -70,13 +63,31 @@ def magic(x):
     topl=[]
     global y
     y=1
+
     for f in range(n+1):
-        t = term(f)
-        topl.append(t[0])
-        den.append(t[1])
+        t = term(f) # a, bb = term(f)
+        a = abs(t[0])
+        bb = abs(t[1])
+        tot=1
+        i=2
+        while a != bb:
+            x = (a%i==0)
+            if x:
+                a /= i
+            zz = (bb%i==0)
+            if zz:
+                bb /= i
+            if x and zz:
+                tot *= i
+            if not (x or zz):
+                i += 1
+            
+        topl.append(t[0]/tot)
+        den.append(t[1]/tot)
+
+    print(n, b, p, z)                    
     print(topl)
     print(den)
-    print(n, p, z, b)
         
 magic(2)
 
