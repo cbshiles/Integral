@@ -46,6 +46,22 @@ def term(f):
     y *= sbx(1-f) 
 
     return ((top, y))
+
+def gcd(a, bb):
+    i=2
+    tot=1
+    while a != bb:
+            x = (a%i==0)
+            if x:
+                a /= i
+            zz = (bb%i==0)
+            if zz:
+                bb /= i
+            if x and zz:
+                tot *= i
+            if not (x or zz):
+                i += 1
+            return(tot)
 #################################
 #################################
 
@@ -65,29 +81,17 @@ def magic(x):
     y=1
 
     for f in range(n+1):
-        t = term(f) # a, bb = term(f)
-        a = abs(t[0])
-        bb = abs(t[1])
-        tot=1
-        i=2
-        while a != bb:
-            x = (a%i==0)
-            if x:
-                a /= i
-            zz = (bb%i==0)
-            if zz:
-                bb /= i
-            if x and zz:
-                tot *= i
-            if not (x or zz):
-                i += 1
-            
-        topl.append(t[0]/tot)
-        den.append(t[1]/tot)
+        t = term(f) 
+        a=t[0]
+        bb=t[1]
+        gcdl = (gcd(abs(a), abs(bb)))
+        topl.append(t[0]/gcdl)
+        den.append(t[1]/gcdl)
 
     print(n, b, p, z)                    
     print(topl)
     print(den)
+
         
 magic(2)
 
