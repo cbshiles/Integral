@@ -22,10 +22,11 @@ def factorial(n):
 #Here I'm defining Permutation
 #N!/(n-k)!
 def npr(n, k):
-    np = factorial(n)
-    pr = factorial(n-k)
-    npr = np / pr
-    return(npr)
+    # np = factorial(n)
+    # pr = factorial(n-k)
+    # npr = np / pr
+    # return(npr) #
+    return (factorial(n) / factorial(n-k))
 #################################
 #Creates a list of permutations
 
@@ -40,49 +41,44 @@ def nprlist(n):
 ###################################
 #This is what modifies the exponets for the coeffiecnt values
 def sbx(x):
-    sbx= (n * z)+ p + (x * z)
+    sbx = p + z * (n + x)
     return(sbx)
 
 ##################################
-##################################
-#fucntion to keep the numbers the same going to both the numerator
-#and denominator
-
+#################################
 def term(f):
-    top = npr(n, f) * (z**(f+1))
-    global deno
-    bot(f)
-    return(top)
-#################################
-#################################
-# Does the math for the Denominator of the Coefficents
-def bot(x):
+    global b
+    top = npr(n, f) * (z**(f+1)) * (-b)**f
+
     global y
-    y *= sbx(1-x)
-    global den
-    den.append(y)
-    return(den)
-################################
+    y *= sbx(1-f) 
+
+    return ((top, y))
+#################################
+#################################
 ##where all the magic happens
 def magic(x):
     global n
     n=x            #set n to x
     global p
-    p=4            #define P
+    p=2            #define P
     global z
     z=3            #define Z
-    global den
+    global b
+    b=3
     den=[]
     topl=[]
     global y
     y=1
     for f in range(n+1):
-        topl.append(term(f))
-        global den     
+        t = term(f)
+        topl.append(t[0])
+        den.append(t[1])
     print(topl)
     print(den)
+    print(n, p, z, b)
         
-magic(3)
+magic(2)
 
 ######################
 ######################
