@@ -13,16 +13,10 @@
   "Permutation function"
   (chain (1+ (- n r)) n))
 
-(let (n k b)
-"Integral of x^n * (x+b)^k"
-  (defun run (new-n new-b new-k) 
-    (setf n new-n)
-    (setf b new-b)
-    (setf k new-k)
-    (mapcar #'term (range 0 n)))
-  (defun term (x)
+(defun run (n b k)
+  "Integral of x^n * (x+b)^k"	
+  (defun term(x)
     (/ (* (npr n x) (expt (- b) x))
-       (chain (fn (- 1 x)) (fn 1))))
-  (defun fn (x)
-    (+ k n x)))
-	  
+       (let ((s (+ n k))) ;n+k is the sum of the powers
+	 (chain (+ s 1 (- x)) (+ s 1)))))
+  (mapcar #'term (range 0 n)))
