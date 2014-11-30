@@ -17,6 +17,6 @@
   "Integral of x^n * (x+b)^k"	
   (defun term(x)
     (/ (* (npr n x) (expt (- b) x))
-       (let ((s (+ n k))) ;n+k is the sum of the powers
-	 (chain (+ s 1 (- x)) (+ s 1)))))
+       (let ((s (+ n k 1))) ;s is the sum of the powers(n+k) plus 1
+	 (chain (- s x) s))))
   (mapcar #'term (range 0 n)))
