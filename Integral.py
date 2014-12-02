@@ -69,7 +69,6 @@ class Ratio:
 
     def __str__(self):
         return str(self.n) + "/" + str(self.d)
-
 #################################
 #################################
 ##where all the magic happens
@@ -93,11 +92,8 @@ def magic(x):
     print(n, b, p, z)                    
     for rateeO in coeff:
        print(rateeO),
-
         
 magic(7)
-
-
 
 ######################
 ######################
