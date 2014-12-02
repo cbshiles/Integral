@@ -30,25 +30,8 @@ def nprlist(n):
     print(perm)
     return(perm)
 ###################################
-###################################
-#This is what modifies the exponets for the coeffiecnt values
-def sbx(x):
-    sbx = p + z * (n + x)
-    return(sbx)
-
-##################################
 #################################
-def term(f):
-    global b
-    top = npr(n, f) * (-b)**f  * (z**(f+1))
-
-    global y
-    y *= sbx(1-f) 
-
-    return ((top, y))
-#################################
-#################################
-def order(a, b):
+def order(a, b): #largest first
     return (a, b) if a>b else (b, a)
 
 def gcd2(a, b): #Euclid's method
@@ -73,17 +56,23 @@ class Ratio:
 #################################
 ##where all the magic happens
 def magic(x):
-    global n
     n=x            #set n to x
-    global p
     p=1            #define P
-    global z
     z=2            #define Z
-    global b
     b=1
     coeff=[]
     global y
     y=1
+
+    #This is what modifies the exponets for the coeffiecnt values
+    def sbx(x):
+        return p + z * (n + x)
+        
+    def term(f):
+        top = npr(n, f) * (-b)**f  * (z**(f+1))
+        global y
+        y *= sbx(1-f)
+        return ((top, y))
 
     for f in range(n+1):
         coeff.append(Ratio(term(f)))
