@@ -48,14 +48,14 @@ def term(f):
     return ((top, y))
 #################################
 #################################
-def gcd2(a, b):
+def gcd2(a, b): #Euclid's method
     t = (abs(a), abs(b))
-    return sub(t[0], t[1]) if a>b else sub(t[1], t[0])
+    return sub( t if a>b else (t[1], t[0]))
 
-def sub(a, b):
-    if b <= 0:
-        return a
-    return sub(b, a%b)
+def sub(t): #t[0] is always larger than t[1]
+    if t[1] <= 0:
+        return t[0]
+    return sub((t[1], t[0]%t[1]))
 #################################
 #################################
 class Ratio:
@@ -93,7 +93,7 @@ def magic(x):
        print(rateeO),
 
         
-magic(3)
+magic(7)
 
 
 
