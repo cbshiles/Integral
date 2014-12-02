@@ -46,30 +46,22 @@ def term(f):
     y *= sbx(1-f) 
 
     return ((top, y))
+#################################
+#################################
+def gcd2(a, b):
+    t = (abs(a), abs(b))
+    return sub(t[0], t[1]) if a>b else sub(t[1], t[0])
 
-def gcd(a, b):
-    a=abs(a)
-    b=abs(b)
-    i=2
-    tot=1
-    while a != b:
-            x = (a%i==0)
-            if x:
-                a /= i
-            y = (b%i==0)
-            if y:
-                b /= i
-            if x and y:
-                tot *= i
-            if not (x or y):
-                i += 1
-            return(tot)
+def sub(a, b):
+    if b <= 0:
+        return a
+    return sub(b, a%b)
 #################################
 #################################
 class Ratio:
     """Here's some ish from lisp"""
     def __init__(self, tup):
-        g = gcd(tup[0], tup[1])
+        g = gcd2(tup[0], tup[1])
         self.n = tup[0]/g
         self.d = tup[1]/g
 
@@ -83,24 +75,27 @@ def magic(x):
     global n
     n=x            #set n to x
     global p
-    p=2            #define P
+    p=1            #define P
     global z
-    z=3            #define Z
+    z=2            #define Z
     global b
-    b=3
+    b=1
     coeff=[]
     global y
     y=1
 
     for f in range(n+1):
         coeff.append(Ratio(term(f)))
-
+    
+    print("(n, b, p, z)")
     print(n, b, p, z)                    
     for rateeO in coeff:
        print(rateeO),
 
         
-magic(7)
+magic(3)
+
+
 
 ######################
 ######################
