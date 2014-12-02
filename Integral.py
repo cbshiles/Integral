@@ -48,9 +48,11 @@ def term(f):
     return ((top, y))
 #################################
 #################################
+def order(a, b):
+    return (a, b) if a>b else (b, a)
+
 def gcd2(a, b): #Euclid's method
-    t = (abs(a), abs(b))
-    return sub( t if a>b else (t[1], t[0]))
+    return sub(order(abs(a), abs(b)))
 
 def sub(t): #t[0] is always larger than t[1]
     if t[1] <= 0:
