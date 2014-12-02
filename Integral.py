@@ -46,9 +46,38 @@ def term(f):
     y *= sbx(1-f) 
 
     return ((top, y))
-#################################
-#################################
 
+def gcd(a, b):
+    a=abs(a)
+    b=abs(b)
+    i=2
+    tot=1
+    while a != b:
+            x = (a%i==0)
+            if x:
+                a /= i
+            y = (b%i==0)
+            if y:
+                b /= i
+            if x and y:
+                tot *= i
+            if not (x or y):
+                i += 1
+            return(tot)
+#################################
+#################################
+class Ratio:
+    """Here's some ish from lisp"""
+    def __init__(self, tup):
+        g = gcd(tup[0], tup[1])
+        self.n = tup[0]/g
+        self.d = tup[1]/g
+
+    def __str__(self):
+        return str(self.n) + "/" + str(self.d)
+
+#################################
+#################################
 ##where all the magic happens
 def magic(x):
     global n
@@ -59,37 +88,19 @@ def magic(x):
     z=3            #define Z
     global b
     b=3
-    den=[]
-    topl=[]
+    coeff=[]
     global y
     y=1
 
     for f in range(n+1):
-        t = term(f) # a, bb = term(f)
-        a = abs(t[0])
-        bb = abs(t[1])
-        tot=1
-        i=2
-        while a != bb:
-            x = (a%i==0)
-            if x:
-                a /= i
-            zz = (bb%i==0)
-            if zz:
-                bb /= i
-            if x and zz:
-                tot *= i
-            if not (x or zz):
-                i += 1
-            
-        topl.append(t[0]/tot)
-        den.append(t[1]/tot)
+        coeff.append(Ratio(term(f)))
 
     print(n, b, p, z)                    
-    print(topl)
-    print(den)
+    for rateeO in coeff:
+       print(rateeO),
+
         
-magic(2)
+magic(7)
 
 ######################
 ######################
