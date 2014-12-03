@@ -34,7 +34,7 @@ def nprlist(n):
 def order(a, b): #largest first
     return (a, b) if a>b else (b, a)
 
-def gcd2(a, b): #Euclid's method
+def gcd(a, b): #Euclid's method
     return sub(order(abs(a), abs(b)))
 
 def sub(t): #t[0] is always larger than t[1]
@@ -57,8 +57,8 @@ class Ratio:
 ##where all the magic happens
 def magic(x):
     n=x            #set n to x
-    p=1            #define P
-    z=2            #define Z
+    p=2            #define P
+    z=3            #define Z
     b=1
     coeff=[]
     global y
@@ -82,7 +82,7 @@ def magic(x):
     for rateeO in coeff:
        print(rateeO),
         
-magic(7)
+magic(2)
 
 ######################
 ######################
