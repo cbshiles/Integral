@@ -30,70 +30,59 @@ def nprlist(n):
     print(perm)
     return(perm)
 ###################################
-###################################
-#This is what modifies the exponets for the coeffiecnt values
-def sbx(x):
-    sbx = p + z * (n + x)
-    return(sbx)
-
-##################################
 #################################
-def term(f):
-    global b
-    top = npr(n, f) * (-b)**f  * (z**(f+1))
+def order(a, b): #largest first
+    return (a, b) if a>b else (b, a)
 
-    global y
-    y *= sbx(1-f) 
+def gcd2(a, b): #Euclid's method
+    return sub(order(abs(a), abs(b)))
 
-    return ((top, y))
-
-def gcd(a, bb):
-    i=2
-    tot=1
-    while a != bb:
-            x = (a%i==0)
-            if x:
-                a /= i
-            zz = (bb%i==0)
-            if zz:
-                bb /= i
-            if x and zz:
-                tot *= i
-            if not (x or zz):
-                i += 1
-            return(tot)
+def sub(t): #t[0] is always larger than t[1]
+    if t[1] <= 0:
+        return t[0]
+    return sub((t[1], t[0]%t[1]))
 #################################
 #################################
+class Ratio:
+    """Here's some ish from lisp"""
+    def __init__(self, tup):
+        g = gcd2(tup[0], tup[1])
+        self.n = tup[0]/g
+        self.d = tup[1]/g
 
+    def __str__(self):
+        return str(self.n) + "/" + str(self.d)
+#################################
+#################################
 ##where all the magic happens
 def magic(x):
-    global n
     n=x            #set n to x
-    global p
-    p=2            #define P
-    global z
-    z=3            #define Z
-    global b
-    b=3
-    den=[]
-    topl=[]
+    p=1            #define P
+    z=2            #define Z
+    b=1
+    coeff=[]
     global y
     y=1
 
-    for f in range(n+1):
-        t = term(f) 
-        a=t[0]
-        bb=t[1]
-        gcdl = (gcd(abs(a), abs(bb)))
-        topl.append(t[0]/gcdl)
-        den.append(t[1]/gcdl)
-
-    print(n, b, p, z)                    
-    print(topl)
-    print(den)
-
+    #This is what modifies the exponets for the coeffiecnt values
+    def sbx(x):
+        return p + z * (n + x)
         
-magic(2)
+    def term(f):
+        top = npr(n, f) * (-b)**f  * (z**(f+1))
+        global y
+        y *= sbx(1-f)
+        return ((top, y))
+
+    for f in range(n+1):
+        coeff.append(Ratio(term(f)))
+    
+    print("(n, b, p, z)")
+    print(n, b, p, z)                    
+    for rateeO in coeff:
+       print(rateeO),
+        
+magic(7)
 
 ######################
 ######################
