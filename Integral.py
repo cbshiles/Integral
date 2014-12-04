@@ -10,17 +10,6 @@ from _functools import reduce
 def npr(n, k):
     return reduce(operator.mul, range(n-k+1,n+1), 1)
 #################################
-#Creates a list of permutations
-
-def nprlist(n):
-    perm=[]
-    for k in range(1, n):
-        perm.append(npr(n, k))
-    perm.append(perm[len(perm)-1])
-    print(perm)
-    return(perm)
-###################################
-#################################
 def order(a, b): #largest first
     return (a, b) if a>b else (b, a)
 
@@ -62,7 +51,7 @@ def magic(x):
         top = npr(n, f) * (-b)**f  * (z**(f+1))
         global y
         y *= sbx(1-f)
-        return ((top, y))
+        return (top, y)
 
     for f in range(n+1):
         coeff.append(Ratio(term(f)))
