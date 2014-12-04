@@ -1,16 +1,6 @@
-## came from functools wouldn't import so I just defined its function to use
+
 import operator
-def reduce(function, iterable, initializer=None):
-    it = iter(iterable)
-    if initializer is None:
-        try:
-            initializer = next(it)
-        except StopIteration:
-            raise TypeError('reduce() of empty sequence with no initial value')
-    accum_value = initializer
-    for x in it:
-        accum_value = function(accum_value, x)
-    return accum_value
+from _functools import reduce
 ###########################
 #My Code starts here
 #First I'm going to define what a factorial is
@@ -46,7 +36,7 @@ def sub(t): #t[0] is always larger than t[1]
 class Ratio:
     """Here's some ish from lisp"""
     def __init__(self, tup):
-        g = gcd2(tup[0], tup[1])
+        g = gcd(tup[0], tup[1])
         self.n = tup[0]/g
         self.d = tup[1]/g
 
@@ -81,22 +71,8 @@ def magic(x):
     print(n, b, p, z)                    
     for rateeO in coeff:
        print(rateeO),
-        
+
 magic(2)
 
 ######################
 ######################
-# Right now all it prints is the Numerator and Denominator of each coeffiecent
-# for the integral of x^n * (x+1)^p/z (It does it seperately and I plan to write
-# a function to simplfy the fractions
-# we have figured out for a x^n * (x+b)^p/z form but its coded for in lisp and
-# hasn't made it to python yet
-#
-# output lists will read
-#[3.0, 27.0, 162.0, 486.0]
-#[16, 208, 2080, 14560]
-# there is attached to every coeffiecent the vaule of (x+1)^(p/z +1) *x^n-1
-# x+1 is what is inside of the original function 
-# the answer to the first term would be 3/16*(x+1)^(p/z +1) *x^n
-# all the coeffiecnts are 3/16 - 27/208 + 81/1040 - 243/7280
-# expect more efficent code and features when I have some more spare time
