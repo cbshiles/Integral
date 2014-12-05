@@ -46,7 +46,7 @@ def sub(t): #t[0] is always larger than t[1]
 class Ratio:
     """Here's some ish from lisp"""
     def __init__(self, tup):
-        g = gcd2(tup[0], tup[1])
+        g = gcd(tup[0], tup[1])
         self.n = tup[0]/g
         self.d = tup[1]/g
 
@@ -57,9 +57,9 @@ class Ratio:
 ##where all the magic happens
 def magic(x):
     n=x            #set n to x
-    p=2            #define P
-    z=3            #define Z
-    b=1
+    p=1            #define P
+    z=2            #define Z
+    b=1.5
     coeff=[]
     global y
     y=1
@@ -82,7 +82,7 @@ def magic(x):
     for rateeO in coeff:
        print(rateeO),
         
-magic(2)
+magic(7)
 
 ######################
 ######################
