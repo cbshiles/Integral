@@ -57,7 +57,7 @@ def magic(n, b, p, z):
     for rateeO in coeff:
        print(rateeO),
 
-magic(7, 1.5, 1, 2)
+magic(7, 8, 8, 3)
 ######################
 ######################
 

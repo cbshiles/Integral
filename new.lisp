@@ -13,6 +13,13 @@
   "Permutation function"
   (chain (1+ (- n r)) n))
 
+(defun strang (po zo n)
+  (do ((i 0 (1+ i)) (p po (* p p)) (z zo (* z (- z p))))
+      ((> i n) nil)
+    (princ (/ (* p (npr n i)) z))
+    (princ " "))))
+
+
 (defun run (n b k)
   "Integral of x^n * (x+b)^k"	
   (defun term(x)

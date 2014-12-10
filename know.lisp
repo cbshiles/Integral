@@ -26,12 +26,12 @@
 	(nreverse lzt)
 	(psub (1+ ri) (cons (next (car lzt)) lzt))))
 
-  (let ( (tri (psub 1 (cons(cons 1 nil)nil))))
+  (let ( (tri (psub 1 (cons(cons 1 nil)nil)))) ; (list (list 1))
     (defun row(n) (nth n tri))))
 
 
 (defun run(n b k)
-  (pascals (1+ n)) ;Provides access to row(n) function
+  (pascals (ceiling (+ n k))) ;Provides access to row(n) function
 
 ;Have not tested :a parameter
   (defun expand(n &key (a 1) (b 1)) ;expansion of (ax + b)^n
@@ -42,7 +42,7 @@
 
   (let ( sum (ulist (mapn2 (expand n :b (- b)) #'/ (range (1+ k) (+ 1 n k)))))
     (dotimes (x (1+ n))
-      (setf sum (mapn2 (doeach (expand (1+ x) :b b) * (nth x ulist)) #'+ sum)));doeach * nth in ulist
+      (setf sum (mapn2 (doeach (expand (ceiling (+ k x)) :b b) * (nth x ulist)) #'+ sum)));doeach * nth in ulist
    (nreverse sum)))
 
 ;(run 2 1 1/3)
